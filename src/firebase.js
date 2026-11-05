@@ -5,17 +5,23 @@ import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyC8nPfZTcbYst0vsCoQ7R016uDmoCR086w",
-  authDomain: "project-management-c3e30.firebaseapp.com",
-  projectId: "project-management-c3e30",
-  storageBucket: "project-management-c3e30.firebasestorage.app",
-  messagingSenderId: "580386192253",
-  appId: "1:580386192253:web:7f30d2a02c0627e9dcea14",
-  measurementId: "G-KTRGB4GCSC"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || undefined
 };
+
+const missingConfig = Object.entries(firebaseConfig)
+  .filter(([key, value]) => key !== "measurementId" && !value)
+  .map(([key]) => `VITE_FIREBASE_${key.replace(/[A-Z]/g, (letter) => `_${letter}`).toUpperCase()}`);
+
+if (missingConfig.length) {
+  throw new Error(`Missing Firebase configuration: ${missingConfig.join(", ")}`);
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
