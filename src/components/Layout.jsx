@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar"
 
 function Layout() {
   return (
-    <div>
+    <div className="layoutDiv">
         <Sidebar />
         <div className="main">
             <Outlet />

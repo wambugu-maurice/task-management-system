@@ -1,7 +1,13 @@
+import AddProject from "../components/AddProject"
 
 function Projects() {
   return (
-    <div>Projects</div>
+    <section className="projectsPage">
+        <div className="addProject">
+          <AddProject />
+        </div>
+    </section>
+    
   )
 }
 

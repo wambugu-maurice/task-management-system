@@ -133,32 +133,40 @@ html {
     width:15% ;
 }
 
-.sideBar ul {
-    list-style: none;
-   
-    
-}
-
-.sideBar ul li{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 30px; width: 150px; 
+.logo{
     padding: 10px;
-    border-radius: 10px;
 }
 
-.sideBar ul li:hover{
-    background-color: orange;
+.logo h2{
+    margin: 20px;
 }
 
-.sideBar ul h2{
-    margin: 30px;
-    font-weight: 700;
-}
-
-.linkIcons{
+.linksDiv{
+    margin-left: 30px;
     margin-right: 10px;
 }
+
+.linksDiv ul li{
+    list-style: none;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    padding: 3px;
+}
+
+.links:hover{
+    color: orange;
+
+}
+
+.icons{
+    font-size: 20px;
+}
+
+
 
 
