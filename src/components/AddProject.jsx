@@ -5,17 +5,20 @@ import toast from "react-hot-toast";
 import useUser from "../hooks/useUser";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import SearchUsers from "./SearchUsers";
 function AddProject() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const[loading,setLoading]=useState(false)
   const[error,setError]=useState({})
+  const[teamMember,setTeamMember]=useState([])
   const[projectForm,setProjectForm]=useState({
     title:"",
     description:"",
     dueDate:""
   })
-  const[teamMember,setTeamMember]=useState([]);
   const[projectPriority,setProjectPriority]=useState("")
+  const[added,setAdded]=useState([])
+
   const{loggedInUser}=useUser()
 
   function handleFormInput(e){
@@ -24,8 +27,7 @@ function AddProject() {
     setError({})
   }
   function handleSelect(e){
-    const{name,value}=e.target
-    setProjectPriority((prev)=>({...prev,[name]:value}))
+    setProjectPriority(e.target.value)
     setError({})
     
   }
@@ -62,11 +64,11 @@ function AddProject() {
 
     try {
         const newProject = {
-            title: title,
-            description: description,
-            dueDate: dueDate,
-            projectPriority: projectPriority,
-            teamMember: teamMember,
+            title,
+            description,
+            dueDate,
+            projectPriority,
+            teamMember,
             addedBy: loggedInUser?.id ?? null,
             addedOn: serverTimestamp()
                 }
@@ -75,6 +77,7 @@ function AddProject() {
             setProjectForm({title:"", description:"",dueDate:""})
             setProjectPriority("")
             setTeamMember([])
+            setAdded([])
             onClose()
             toast.success("Project added")
         
@@ -86,6 +89,7 @@ function AddProject() {
         setLoading(false)
     }
   }
+  
 
   return (
     <section className="projects">
@@ -134,7 +138,19 @@ function AddProject() {
               </FormControl>
               <FormControl>
                 <FormLabel>Team members</FormLabel>
-                <Input placeholder="Search for team member" name="members" value={teamMember} onChange={(e)=>setTeamMember(e.target.value)}/>
+                <SearchUsers
+                  teamMember={teamMember}
+                  setTeamMember={setTeamMember}
+                  setAdded={setAdded}
+                  added={added}
+                />
+                <ul>
+                  {
+                    added.map((user)=>(
+                      <li key={user.id}>{user.name} | {user.email}</li>
+                    ))
+                  }
+                </ul>
                 <div className="formErrorContainer">
                 {error.teamMember && <p>{error.teamMember}</p>}
               </div>

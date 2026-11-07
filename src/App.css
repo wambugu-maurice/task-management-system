@@ -167,6 +167,19 @@ html {
     font-size: 20px;
 }
 
+.searchInput{
+    width: 95%;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+.searchInput:focus{
+        outline: 2px solid blue;
+
+
+}
+
 
 
 
