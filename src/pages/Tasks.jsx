@@ -1,7 +1,10 @@
+import AsignRoles from "../components/AsignRoles"
 
 function Tasks() {
   return (
-    <div>Tasks</div>
+    <div>
+      <AsignRoles />
+    </div>
   )
 }
 

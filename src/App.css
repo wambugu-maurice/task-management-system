@@ -176,10 +176,39 @@ html {
 
 .searchInput:focus{
         outline: 2px solid blue;
-
-
 }
 
+.projectModal h2{
+    padding: 10px;
+}
+.projectModal p{
+    padding-left: 15px;
+}
 
+.projectModal div{
+    padding-left: 10px;
+}
+
+.projectsDiv{
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+
+.project{
+    background-color: rgba(211, 211, 211, 0.642);
+    padding: 10px;
+     margin: 10px;
+}
+
+.editInput{
+    border: 1px solid black;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.editInput::placeholder{
+    text-align: center;
+}
 
 
